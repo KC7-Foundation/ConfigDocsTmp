@@ -1,0 +1,150 @@
+## Intro 
+
+The company config defines how the company behaves, and primarily the following things
+
+* The dates on which the company will operate: these are the time bounds of the game.
+* The times are which the company operators: this is the "normal" pattern of life against which game players can look for abnormal activity.
+* Who the company interacts with. Partners can be a liability when they are compromised 
+
+## Metadata:
+
+The metadata field are all required and should look something like this:
+
+```yaml
+name: EnvolveLabs
+domain: envolvelabs.xyz
+count_employees: 1500
+activity_start_date: "2023-07-15"
+activity_end_date: "2023-10-11"
+activity_start_hour: 8
+workday_length_hours: 9
+working_days:
+- "Monday"
+- "Tuesday"
+- "Wednesday"
+- "Thursday"
+- "Friday"
+```
+
+**Notes: **
+* The name of the company should be the exact same as the actor file name. So EnvolveLabs -> EnvolveLabs.yaml
+* Try to keep your workday_length_hours under 24
+
+## Roles
+
+The roles define who works for your company and what they do 
+
+example: 
+```yaml
+- title: Chief Financial Officer
+  limit: 1
+  names:
+  - Laura Mitchell
+- title: Director of Operations
+  limit: 10
+  names:
+  - Jessica Turner
+  - Maria Sanchez
+  - Michael Anderson
+```
+
+* The role "limit" determines the maximum number of people that can have a certain role. 
+* The sum of role limits should be greater than the count of employees at your company (count_employees). 
+* You may optionally define names for the people that hold a given, these names will be selected randomly until there are no names.
+* When there are no names left (or no names are defined), arbitrary names are assigned to the employees. 
+* Try to avoid titles like "Dr." or "Ph.D." in titles, as they may look funny in the resulting email addresses. 
+
+## partners 
+
+Partner domains define who the company works with. 
+
+* You will receive legitimate emails from these domains. 
+* You will see legitimate browsing from these domains
+* In "supply-chain" attacks, user@partner.com will be used to send malicious emails
+* In "Watering-hole" attacks, you will see partner.com?redirect=evil.com in outboundbrowsing shortly before the user is server malicious content. 
+
+```yaml
+partners:
+- wesellbeakers.online
+- pharmasupplies.shop
+- researchcompliance.biz
+- vaxdistro.site
+```
+
+## Full example
+
+```yaml
+name: EnvolveLabs
+domain: envolvelabs.xyz
+count_employees: 1500
+activity_start_date: "2023-07-15"
+activity_end_date: "2023-10-11"
+activity_start_hour: 8
+workday_length_hours: 9
+working_days:
+- "Monday"
+- "Tuesday"
+- "Wednesday"
+- "Thursday"
+- "Friday"
+roles:
+- title: CEO
+  limit: 1
+  names:
+  - Katie Dimes
+- title: Chief Scientific Officer
+  limit: 1
+  names:
+  - Allison Carter
+- title: Chief Technology Officer
+  limit: 1
+  names:
+  - Ethan Patel
+- title: Chief Financial Officer
+  limit: 1
+  names:
+  - Laura Mitchell
+- title: Director of Operations
+  limit: 10
+  names:
+  - Jessica Turner
+  - Maria Sanchez
+  - Michael Anderson
+- title: Lead Researcher
+  limit: 3
+  names:
+  - Emily Johnson
+  - Daniel Kim
+  - Sarah Miller
+- title: Chief Scientist
+  limit: 3
+- title: Research Associate
+  limit: 400
+- title: IT Specialist
+  limit: 20
+- title: HR Specialist
+  limit: 50
+- title: Lab Technician
+  limit: 600
+- title: Research Intern
+  limit: 100
+- title: Quality Control Analyst
+  limit: 300
+  names:
+  - Simeon Kakpovi
+  - Greg Schloemer
+  - Emily Hacker
+  - Waymon Ho
+  - Erica Peterson
+- title: Regulatory Affairs Specialist
+  limit: 200
+- title: Sales Representative
+  limit: 150
+- title: Marketing Specialist
+  limit: 150
+partners:
+- wesellbeakers.online
+- pharmasupplies.shop
+- researchcompliance.biz
+- vaxdistro.site
+```
